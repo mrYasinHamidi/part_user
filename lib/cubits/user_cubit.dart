@@ -12,7 +12,7 @@ class UserListCubit extends Cubit<UserListState> {
     refreshData();
   }
 
-  ///Refreshing user data frome remote
+  ///Refreshing user list data frome remote
   void refreshData() async {
     emit(UserListState.initialize());
     UsersDataResponse response = await apiRepository.getUsers();
