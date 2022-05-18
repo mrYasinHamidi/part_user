@@ -11,9 +11,9 @@ class ApiRepository {
       sendTimeout: 5000,
     );
 
-  ///Get all User date
-  ///If api cant successfully called we set the status code of returned model 400
-  ///iIf api  successfully called we set the status code of returned model 200
+  ///Get all Users data
+  ///Failed case => return model with  status code  400
+  ///Success case => return model with status code 200
   Future<UsersDataResponse> getUsers({int page = 2}) async {
     UsersDataResponse usersDataResponse;
     try {
@@ -21,7 +21,7 @@ class ApiRepository {
 
       Response response = await _dio.get(url);
 
-      ///return Response with returned date
+      ///return Response with returned data
       usersDataResponse = UsersDataResponse.fromJson(response.data);
       usersDataResponse.statusCode = 200;
     } catch (e) {
@@ -32,7 +32,8 @@ class ApiRepository {
   }
 
   ///Delete user api
-  ///If successfully deleted return true otherwise returned false
+  ///Failed case => return false
+  ///Success case => return true
   Future<bool> deleteUser(int id) async {
     try {
       String url = 'api/users$id';
